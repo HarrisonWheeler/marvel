@@ -1,5 +1,6 @@
 import _store from "../store.js";
 import Hero from "../Models/Hero.js";
+import store from "../store.js";
 
 // @ts-ignore
 let _api = axios.create({
@@ -8,7 +9,7 @@ let _api = axios.create({
 })
 // @ts-ignore
 let _sandBoxApi = axios.create({
-  baseURL: 'https://bcw-sandbox.herokuapp.com/api/YOURNAMEHERE/heroes',
+  baseURL: 'https://bcw-sandbox.herokuapp.com/api/harrisonwheeler/heroes',
   timeout: 5000
 })
 
@@ -16,6 +17,8 @@ let _sandBoxApi = axios.create({
 class HeroesService {
   constructor() {
     this.getNewHeroes()
+    this.addHeroes()
+
   }
 
   getNewHeroes() {
@@ -25,6 +28,19 @@ class HeroesService {
       _store.commit("newHeroes", res.data.data.results.map(rawHeroData => new Hero(rawHeroData)))
       console.log(_store.State.newHeroes);
     }).catch(err => console.error(err))
+  }
+
+  addHeroes() {
+    _sandBoxApi.post('', _store.State.myHeroes).then(res => {
+      console.log(res.data);
+      this.getMyHeroes()
+    }).catch(err => console.log(err))
+  }
+
+  getMyHeroes() {
+    _sandBoxApi.get("").then(res => {
+      _store.commit("myHeroes", res.data.data.map(rawHeroData => new Hero(rawHeroData)))
+    }).catch(err => console.log(err))
   }
 
 }
