@@ -23,8 +23,16 @@ export default class HeroesController {
     _store.subscribe("myHeroes", _drawMyHeroes);
   }
   // pass through name from model into addHeroes function??
-  addHeroes() {
-    _heroesService.addHeroes()
+  addHeroes(heroId) {
+    // debugger
+    _heroesService.addHeroes(heroId)
+
+  }
+  getNewHeroes() {
+    _heroesService.getNewHeroes()
   }
 
+  getMyHeroes() {
+    _heroesService.getMyHeroes()
+  }
 }

@@ -4,7 +4,7 @@ import store from "../store.js";
 
 // @ts-ignore
 let _api = axios.create({
-  baseURL: 'https://gateway.marvel.com:443/v1/public/characters?apikey=2148bbf76c5acd7c1b486d33517c8d71&limit=100',
+  baseURL: 'https://gateway.marvel.com:443/v1/public/',
   timeout: 3000
 })
 // @ts-ignore
@@ -23,15 +23,17 @@ class HeroesService {
 
   getNewHeroes() {
     // debugger
-    _api.get("").then(res => {
+    _api.get("characters?apikey=2148bbf76c5acd7c1b486d33517c8d71&limit=100").then(res => {
       console.log(res.data.data.results);
-      _store.commit("newHeroes", res.data.data.results.map(rawHeroData => new Hero(rawHeroData)))
-      console.log(_store.State.newHeroes);
+      let heroes = res.data.data.results.map(rawHeroData => new Hero(rawHeroData))
+      _store.commit("newHeroes", heroes)
     }).catch(err => console.error(err))
   }
 
-  addHeroes() {
-    _sandBoxApi.post("", _store.State.myHeroes).then(res => {
+  addHeroes(heroId) {
+
+    let myHeroId = _store.State.newHeroes.find(h => h.id == heroId)
+    _sandBoxApi.post("", myHeroId).then(res => {
       console.log(res.data);
       this.getMyHeroes()
     }).catch(err => console.log(err))
