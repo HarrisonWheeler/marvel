@@ -1,5 +1,7 @@
 export default class Hero {
     constructor(data) {
+        // need to add an id and pass it through
+        this.id = data._id
         this.name = data.name
         this.img = data.thumbnail.path + "." + data.thumbnail.extension
         this.description = data.description || "No Description"
@@ -15,7 +17,7 @@ export default class Hero {
                     <img src="${this.img}" class="img-fluid" alt="">
                     <h3>Description: ${this.description}</h3>
                     <h3>User: ${this.user}</h3>
-                    <button class="btn btn-rounded btn-success btn-block" onclick="app.heroesController.addHeroes()">Add To Team!</button>
+                    <button class="btn btn-rounded btn-success btn-block" onclick="app.heroesController.addHeroes('${this.name}')">Add To Team!</button>
                 </div>
             </div>
                 `

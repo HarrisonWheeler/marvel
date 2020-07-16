@@ -23,7 +23,7 @@ class HeroesService {
 
   getNewHeroes() {
     // debugger
-    _api.get().then(res => {
+    _api.get("").then(res => {
       console.log(res.data.data.results);
       _store.commit("newHeroes", res.data.data.results.map(rawHeroData => new Hero(rawHeroData)))
       console.log(_store.State.newHeroes);
@@ -31,11 +31,13 @@ class HeroesService {
   }
 
   addHeroes() {
-    _sandBoxApi.post('', _store.State.myHeroes).then(res => {
+    _sandBoxApi.post("", _store.State.myHeroes).then(res => {
       console.log(res.data);
       this.getMyHeroes()
     }).catch(err => console.log(err))
   }
+
+
 
   getMyHeroes() {
     _sandBoxApi.get("").then(res => {

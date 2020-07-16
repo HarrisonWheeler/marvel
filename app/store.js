@@ -3,7 +3,6 @@ import Hero from "./Models/Hero.js";
 let _state = {
   /** @type {Hero[]} */
   newHeroes: [],
-  activeHeroes: [],
   myHeroes: [],
 };
 
@@ -12,7 +11,6 @@ let _state = {
  */
 let _listeners = {
   newHeroes: [],
-  activeHeroes: [],
   myHeroes: [],
 };
 

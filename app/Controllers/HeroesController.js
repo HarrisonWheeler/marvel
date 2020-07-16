@@ -11,7 +11,7 @@ function _drawNewHeroes() {
 
 function _drawMyHeroes() {
   let template = ""
-  _store.State.myHeroes.forEach(hero => template += hero.Template)
+  _store.State.myHeroes.forEach(myHeroes => template += myHeroes.Template)
   document.getElementById("my-heroes").innerHTML = template
 }
 
@@ -22,6 +22,7 @@ export default class HeroesController {
     _store.subscribe("newHeroes", _drawNewHeroes);
     _store.subscribe("myHeroes", _drawMyHeroes);
   }
+  // pass through name from model into addHeroes function??
   addHeroes() {
     _heroesService.addHeroes()
   }
