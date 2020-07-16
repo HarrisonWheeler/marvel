@@ -17,7 +17,6 @@ let _sandBoxApi = axios.create({
 class HeroesService {
   constructor() {
     this.getNewHeroes()
-    this.addHeroes()
 
   }
 
@@ -36,7 +35,7 @@ class HeroesService {
     _sandBoxApi.post("", myHeroId).then(res => {
       console.log(res.data);
       this.getMyHeroes()
-    }).catch(err => console.log(err))
+    }).catch(err => console.error(err))
   }
 
 
